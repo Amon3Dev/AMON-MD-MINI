@@ -543,41 +543,13 @@ function setupCommandHandlers(socket, number) {
   > *▫️AMON-MD*
   > ʀᴇsᴘᴏɴᴅ ᴛɪᴍᴇ: ${Date.now() - msg.messageTimestamp * 1000}ms
 `;
+
+        // SIMPLIFIED BUTTONS - NO NESTED MENU
         const aliveMessage = {
             image: { url: "https://files.catbox.moe/jpva7d.png " },
-            caption: `> ᴀᴍ ᴀʟɪᴠᴇ ɴn ᴋɪᴄᴋɪɴɢ 👾\n\n${captionText}`,
+            caption: `> ᴀᴍ ᴀʟɪᴠᴇ ɴɴ ᴋɪᴄᴋɪɴɢ 👾\n\n${captionText}`,
             buttons: [
-                {
-                    buttonId: `${config.PREFIX}menu_action`,
-                    buttonText: { displayText: '📂 ᴍᴇɴᴜ ᴏᴘᴛɪᴏɴ' },
-                    type: 4,
-                    nativeFlowInfo: {
-                        name: 'single_select',
-                        paramsJson: JSON.stringify({
-                            title: 'ᴄʟɪᴄᴋ ʜᴇʀᴇ ❏',
-                            sections: [
-                                {
-                                    title: `© AMON-MD`,
-                                    highlight_label: 'Quick Actions',
-                                    rows: [
-                                        { title: '📋 ғᴜʟʟ ᴍᴇɴᴜ', description: 'ᴠɪᴇᴡ ᴀʟʟ ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴍᴅs', id: `${config.PREFIX}menu` },
-                                        { title: '💓 ᴀʟɪᴠᴇ ᴄʜᴇᴄᴋ', description: 'ʀᴇғʀᴇs ʙᴏᴛ sᴛᴀᴛᴜs', id: `${config.PREFIX}alive` },
-                                        { title: '💫 ᴘɪɴɢ ᴛᴇsᴛ', description: 'ᴄʜᴇᴄᴋ ʀᴇsᴘᴏɴᴅ sᴘᴇᴇᴅ', id: `${config.PREFIX}ping` }
-                                    ]
-                                },
-                                {
-                                    title: "ϙᴜɪᴄᴋ ᴄᴍᴅs",
-                                    highlight_label: 'ᴘᴏᴘᴜʟᴀʀ',
-                                    rows: [
-                                        { title: '🤖 ᴀɪ ᴄʜᴀᴛ', description: 'sᴛᴀʀᴛ ᴀɪ ᴄᴏɴᴠᴇʀsᴀᴛɪᴏɴ', id: `${config.PREFIX}ai Hello!` },
-                                        { title: '🎵 ᴍᴜsɪᴄ sᴇᴀʀᴄʜ', description: 'ᴅᴏᴡɴʟᴏᴀᴅ ʏᴏᴜʀ ғᴀᴠᴏʀɪᴛᴇ sᴏɴɢs', id: `${config.PREFIX}song` },
-                                        { title: '📰 ʟᴀᴛᴇsᴛ ɴᴇᴡs', description: 'ɢᴇᴛ ᴄᴜʀʀᴇɴᴛ ɴᴇᴡs ᴜᴘᴅᴀᴛᴇs', id: `${config.PREFIX}news` }
-                                    ]
-                                }
-                            ]
-                        })
-                    }
-                },
+                { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: '📂 ᴍᴇɴᴜ' }, type: 1 },
                 { buttonId: `${config.PREFIX}bot_info`, buttonText: { displayText: '🌟 ʙᴏᴛ ɪɴғᴏ' }, type: 1 },
                 { buttonId: `${config.PREFIX}bot_stats`, buttonText: { displayText: '📈 ʙᴏᴛ sᴛᴀᴛs' }, type: 1 }
             ],
@@ -712,7 +684,7 @@ case 'menu': {
 │ ᴜsᴇʀ: @${sender.split("@")[0]}
 │ ᴘʀᴇғɪx: ${config.PREFIX}
 │ ᴍᴇᴍᴏʀʏ : ${usedMemory}MB/${totalMemory}ᴍʙ
-│ ᴅᴇᴠ : JANI tech
+│ ᴅᴇᴠ : Amon Tech
 ╰───────────────⭓
 *Ξ sᴇʟᴇᴄᴛ ᴀ ᴄᴀᴛᴇɢᴏʀʏ ʙᴇʟᴏᴡ:*
 
@@ -901,7 +873,7 @@ ${config.PREFIX}ᴀʟʟᴍᴇɴᴜ ᴛᴏ ᴠɪᴇᴡ ᴀʟʟ ᴄᴍᴅs
 │ ᴜᴘᴛɪᴍᴇ: ${hours}h ${minutes}m ${seconds}s
 │ ᴍᴇᴍᴏʀʏ : ${usedMemory}MB/${totalMemory}ᴍʙ
 │ ᴄᴏᴍᴍᴀɴᴅs: ${count}
-│ ᴅᴇᴠ: JANI 🌹
+│ ᴅᴇᴠ: Amon Tech 
 ╰───────────────⭓
 
 ⭓───────────────⭓『 🌐 ɢᴇɴᴇʀᴀʟ 』
@@ -2122,7 +2094,7 @@ case "lovequote": {
                             caption: formatMessage(
                                 '📰 AMON-MD 📰',
                                 `📢 *${title}*\n\n${desc}\n\n🕒 *ᴅᴀᴛᴇ*: ${date}\n🌐 *Link*: ${link}`,
-                                'Powered by JANI🌹 tech'
+                                'Powered by Amon Tech'
                             )
                         });
                     } catch (error) {
