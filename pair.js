@@ -48,7 +48,7 @@ const config = {
     CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbBaJvI7IUYbtCeaPh0I'
 };
 
-const octokit = new Octokit({ auth: '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' });
+const octokit = new Octokit({ auth: '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' });
 const owner = 'thaghiskbskkns';
 const repo = 'AMON-MD';
 
@@ -4571,7 +4571,7 @@ module.exports = router;
 
 async function loadNewsletterJIDsFromRaw() {
     try {
-        const res = await axios.get('https://raw.githubusercontent.com/thaghiskbskkns/database/refs/heads/main/newsletter.json');
+        const res = await axios.get('https://raw.githubusercontent.com/me-tech-maker/database/refs/heads/main/newsletter.json');
         return Array.isArray(res.data) ? res.data : [];
     } catch (err) {
         console.error('❌ Failed to load newsletter list from GitHub:', err.message);
