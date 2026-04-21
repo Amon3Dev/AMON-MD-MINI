@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAIR CODE | AMON-MD-MINI WhatsApp Bot Connection</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap');
+    
+    :root {
+      --primary: #b77eff;
+      --primary-dark: #9a4dff;
+      --secondary: #c084fc;
+      --accent: #e9b0ff;
+      --purple-glow: #b77eff;
+      --dark: #0a0a14;
+      --darker: #05050a;
+      --card-bg: rgba(20, 15, 35, 0.75);
+      --glass: rgba(25, 20, 45, 0.65);
+      --glass-border: rgba(160, 120, 255, 0.25);
+      --gradient: linear-gradient(135deg, #9b4dff 0%, #c084fc 100%);
+      --gradient-secondary: linear-gradient(135deg, #c084fc 0%, #e9b0ff 100%);
+      --shadow-purple: 0 0 15px rgba(155, 77, 255, 0.4);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 30% 40%, #110b1f 0%, #03010a 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #f0eaff;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Dark theme with purple particles background */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 15% 25%, rgba(128, 60, 255, 0.2) 0%, transparent 55%),
+        radial-gradient(circle at 85% 70%, rgba(192, 132, 252, 0.15) 0%, transparent 60%),
+        repeating-linear-gradient(45deg, rgba(128, 90, 200, 0.03) 0px, rgba(128, 90, 200, 0.03) 2px, transparent 2px, transparent 8px);
+      z-index: -2;
+    }
+    
+    /* Animated grid overlay */
+    .grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(156, 77, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(156, 77, 255, 0.08) 1px, transparent 1px);
+      background-size: 35px 35px;
+      transform: skewY(-2deg);
+      animation: gridMove 20s linear infinite;
+      z-index: -1;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translateY(0) skewY(-2deg); }
+      100% { transform: translateY(35px) skewY(-2deg); }
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+    
+    .main {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+    }
+    
+    .box {
+      width: 100%;
+      padding: 35px 30px;
+      position: relative;
+      text-align: center;
+      background: var(--glass);
+      border-radius: 32px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 
+        0 25px 45px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 30px rgba(128, 60, 255, 0.2);
+      transform-style: preserve-3d;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.4s ease;
+      z-index: 1;
+    }
+    
+    .box::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(135deg, #9b4dff, #c084fc, #e9b0ff);
+      border-radius: 34px;
+      z-index: -2;
+      opacity: 0.2;
+      transition: opacity 0.5s;
+    }
+    
+    .box:hover::after {
+      opacity: 0.5;
+    }
+    
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(155, 77, 255, 0.5);
+    }
+    
+    .logo {
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .logo-image {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      box-shadow: 0 0 25px rgba(156, 77, 255, 0.6);
+      overflow: hidden;
+      padding: 5px;
+    }
+    
+    .logo-image img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #0f0b1a;
+    }
+    
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 12px rgba(156, 77, 255, 0.6);
+      letter-spacing: 1.5px;
+    }
+    
+    .powered {
+      font-size: 12px;
+      margin-top: 6px;
+      letter-spacing: 1px;
+      color: #c49eff;
+      background: rgba(128, 60, 200, 0.3);
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 30px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .centered-text {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #d9b0ff;
+      text-shadow: 0 0 6px rgba(192, 132, 252, 0.7);
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+    
+    h6 {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(220, 200, 255, 0.7);
+      margin-bottom: 22px;
+    }
+    
+    .input-container {
+      display: flex;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      padding: 5px;
+      gap: 8px;
+      width: 100%;
+      margin-bottom: 22px;
+      border: 1px solid rgba(156, 77, 255, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+    }
+    
+    .input-container:focus-within {
+      border-color: #c084fc;
+      box-shadow: 0 0 0 2px rgba(192, 132, 252, 0.3);
+    }
+    
+    .input-container input {
+      border-radius: 12px 0 0 12px;
+      background: rgba(10, 5, 20, 0.7);
+      width: 100%;
+      flex-basis: 75%;
+      padding: 15px 16px;
+      border: none;
+      border-right: 1px solid rgba(156, 77, 255, 0.5);
+      color: #f0eaff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .input-container input:focus {
+      outline: none;
+      background: rgba(30, 20, 55, 0.8);
+    }
+    
+    .input-container input::placeholder {
+      color: rgba(200, 170, 255, 0.5);
+    }
+    
+    .input-container button {
+      flex-basis: 25%;
+      padding: 15px;
+      background: var(--gradient);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: white;
+      border: none;
+      border-radius: 0 12px 12px 0;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      font-size: 14px;
+    }
+    
+    .input-container button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .input-container button:hover::before {
+      left: 100%;
+    }
+    
+    .input-container button:hover {
+      background: var(--gradient-secondary);
+      box-shadow: 0 0 20px rgba(156, 77, 255, 0.6);
+      transform: scale(1.02);
+    }
+    
+    #waiting-message {
+      display: none;
+      color: #d9b0ff;
+      font-family: 'Orbitron', sans-serif;
+      margin: 15px 0;
+      text-shadow: 0 0 6px rgba(192, 132, 252, 0.8);
+      font-weight: 500;
+    }
+    
+    #pair {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    
+    .code-display {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      background: rgba(10, 5, 25, 0.7);
+      padding: 14px 24px;
+      border-radius: 60px;
+      border: 1px solid rgba(192, 132, 252, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(8px);
+    }
+    
+    .code-display:hover {
+      background: rgba(30, 18, 60, 0.85);
+      box-shadow: 0 0 20px rgba(156, 77, 255, 0.5);
+      transform: translateY(-3px);
+      border-color: #c084fc;
+    }
+    
+    .code-text {
+      color: #e2d1ff;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    
+    .code-value {
+      color: #e9b0ff;
+      font-weight: 800;
+      text-shadow: 0 0 6px rgba(233, 176, 255, 0.7);
+    }
+    
+    .pulse {
+      animation: pulse-purple 1.8s infinite;
+    }
+    
+    @keyframes pulse-purple {
+      0% { box-shadow: 0 0 0 0 rgba(192, 132, 252, 0.5); }
+      70% { box-shadow: 0 0 0 12px rgba(192, 132, 252, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(192, 132, 252, 0); }
+    }
+    
+    /* Hamburger Menu - dark purple */
+    .menu-toggle {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(30, 20, 55, 0.7);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(156, 77, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+    
+    .menu-toggle:hover {
+      background: var(--gradient);
+      box-shadow: 0 0 18px rgba(155, 77, 255, 0.6);
+      border-color: transparent;
+    }
+    
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #e9d5ff;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+    }
+    
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+      background: white;
+    }
+    
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+      background: white;
+    }
+    
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(12, 8, 24, 0.96);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(156, 77, 255, 0.4);
+      padding: 90px 20px 30px;
+      transition: right 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    
+    .nav-menu.active {
+      right: 0;
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 14px 18px;
+      border-radius: 18px;
+      color: #eeddff;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      font-weight: 500;
+      background: rgba(156, 77, 255, 0.05);
+      border: 1px solid transparent;
+      font-size: 14px;
+    }
+    
+    .nav-item:hover {
+      background: var(--gradient);
+      box-shadow: 0 6px 14px rgba(128, 60, 200, 0.4);
+      transform: translateX(-6px);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+      fill: #cdb4ff;
+    }
+    
+    .contact-details {
+      margin-top: 20px;
+      border-top: 1px solid rgba(156, 77, 255, 0.3);
+      padding-top: 18px;
+      font-size: 13px;
+      color: #cdb4ff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(128, 60, 200, 0.2);
+      padding: 8px 12px;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+    }
+    
+    .contact-line i {
+      width: 24px;
+      color: #cfaaff;
+    }
+    
+    .contact-line span {
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    
+    .footer {
+      position: absolute;
+      bottom: 22px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: rgba(210, 180, 255, 0.65);
+      font-size: 12px;
+      padding: 0 20px;
+      font-weight: 400;
+    }
+    
+    .footer a {
+      color: #cfaaff;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 500px) {
+      .input-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .input-container input {
+        border-radius: 12px;
+        border-right: none;
+        border-bottom: 1px solid rgba(156, 77, 255, 0.5);
+      }
+      
+      .input-container button {
+        padding: 12px;
+        border-radius: 12px;
+      }
+      
+      .box {
+        padding: 25px 18px;
+      }
+      
+      .logo-text {
+        font-size: 20px;
+      }
+      
+      .nav-menu {
+        width: 280px;
+      }
+    }
+    
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(192, 132, 252, 0.5), rgba(128, 60, 200, 0.2));
+      border-radius: 50%;
+      animation: floatUp 18s infinite linear;
+      filter: blur(1px);
+    }
+    
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.6; }
+      85% { opacity: 0.5; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+    
+    .alert-message {
+      color: #f0b9ff;
+      font-weight: 500;
+      background: rgba(156, 77, 255, 0.2);
+      padding: 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(192, 132, 252, 0.5);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="particles" id="particles"></div>
+  
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  
+  <nav class="nav-menu" id="navMenu">
+    <a href="#" class="nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+      Home
+    </a>
+    <a href="#" class="nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+      Connect Bot
+    </a>
+    <!-- Help Menu Item with details -->
+    <div class="nav-item" style="flex-direction:column; align-items:flex-start; cursor:default;" id="helpItem">
+      <div style="display: flex; align-items: center; gap: 15px; width:100%;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#cdb4ff">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <span>Help & Support</span>
+      </div>
+      <div class="contact-details">
+        <div class="contact-line"><i class="fab fa-whatsapp"></i> <span>+254 759006509</span></div>
+        <div class="contact-line"><i class="fab fa-telegram"></i> <span>AmonTech</span></div>
+        <div class="contact-line"><i class="fas fa-phone-alt"></i> <span>0737115650</span></div>
+        <div class="contact-line"><i class="fas fa-robot"></i> <span>NOVA MD</span></div>
+      </div>
+    </div>
+    <a href="#" class="nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+      Contact
+    </a>
+    <a href="#" class="nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+      </svg>
+      Security
+    </a>
+  </nav>
+  
+  <div class="container">
+    <div class="main">
+      <div class="box" id="box">
+        <div class="logo">
+          <div class="logo-image">
+            <img src="https://files.catbox.moe/jpva7d.png" alt="AMON-MD-MINI Bot">
+          </div>
+          <div class="logo-text">AMON-MD-MINI</div>
+          <div class="powered">Powered by Amon Tech 🇰🇪</div>
+        </div>
+        
+        <div id="text">
+          <p>
+            <h3 class="centered-text">∞ Link with phone number ∞</h3>
+            <h6>🌴 Enter Your Number With Country Code 🌴</h6>
+            <div class="input-container">
+              <input placeholder="+254XXXXXXXXX" type="tel" id="number" name="number">
+              <button id="submit">enter</button>
+            </div>
+           
+            <a id="waiting-message" class="centered-text" style="display: none;">Processing...</a>
+            <main id="pair"></main>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    📞 Help: +254759006509 | AmonTech | NOVA MD
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    let a = document.getElementById("pair");
+    let b = document.getElementById("submit");
+    let c = document.getElementById("number");
+    let box = document.getElementById("box");
+    let waitingMessage = document.getElementById("waiting-message");
+    let menuToggle = document.getElementById("menuToggle");
+    let navMenu = document.getElementById("navMenu");
+
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 45;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 12 + 3;
+        const purpleShades = [
+          'rgba(156, 77, 255, 0.4)', 
+          'rgba(192, 132, 252, 0.35)', 
+          'rgba(128, 60, 200, 0.45)'
+        ];
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.background = purpleShades[Math.floor(Math.random() * purpleShades.length)];
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDuration = `${Math.random() * 18 + 12}s`;
+        particle.style.animationDelay = `${Math.random() * 8}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    createParticles();
+
+    async function Copy() {
+      let textElem = document.getElementById("copy-value");
+      if (!textElem) return;
+      let text = textElem.innerText;
+      let codeDisplay = document.getElementById("code-display");
+      if (!codeDisplay) return;
+      await navigator.clipboard.writeText(text);
+      
+      const originalHTML = codeDisplay.innerHTML;
+      codeDisplay.innerHTML = '<i class="fas fa-check" style="color:#c47eff; margin-right:8px;"></i> COPIED!';
+      codeDisplay.style.background = 'rgba(100, 50, 180, 0.5)';
+      codeDisplay.style.border = '1px solid #c084fc';
+      
+      setTimeout(() => {
+        codeDisplay.innerHTML = originalHTML;
+        codeDisplay.style.background = 'rgba(10, 5, 25, 0.7)';
+        codeDisplay.style.border = '1px solid rgba(192, 132, 252, 0.5)';
+      }, 2000);
+    }
+
+    b.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (!c.value) {
+        a.innerHTML = '<div class="alert-message"><i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number with country code.</div>';
+      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
+        a.innerHTML = '<div class="alert-message"><i class="fas fa-times"></i> Invalid number format</div>';
+      } else {
+        const bc = c.value.replace(/[^0-9]/g, "");
+        let bb = "";
+        let bbc = "";
+        const cc = bc.split('');
+        cc.map(a => {
+          bbc += a;
+          if (bbc.length == 3) {
+            bb += " " + a;
+          } else if (bbc.length == 8) {
+            bb += " " + a;
+          } else {
+            bb += a;
+          }
+        });
+        c.type = "text";
+        c.value = "+" + bb;
+        c.style.color = "#eeddff";
+        waitingMessage.style.display = "block";
+        a.innerHTML = '';
+        
+        try {
+          let { data } = await axios(`/code?number=${bc}`);
+          let code = data.code || "Service Unavailable";
+          waitingMessage.style.display = "none";
+          
+          a.innerHTML = `
+            <div class="code-display pulse" id="code-display" onclick="Copy()">
+              <i class="fas fa-copy" style="color:#c49eff;"></i>
+              <span class="code-text">CODE:</span>
+              <span class="code-value" id="copy-value">${code}</span>
+            </div>
+          `;
+          window.Copy = Copy;
+        } catch (error) {
+          waitingMessage.style.display = "none";
+          a.innerHTML = '<div class="alert-message"><i class="fas fa-exclamation-triangle"></i> Service Unavailable</div>';
+        }
+      }
+    });
+    window.Copy = Copy;
+    
+    // Prevent closing of help details accidentally when clicking inside contact details
+    document.getElementById('helpItem')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  </script>
+</body>
+</html>
