@@ -677,7 +677,7 @@ case 'bot_info': {
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                 newsletterJid: '120363406476499117@newsletter',
-                newsletterName: 'Powered by AMON-MD🌹 TECH',
+                newsletterName: 'Powered by AMON-MD',
                 serverMessageId: -1
             }
         };
@@ -1039,7 +1039,7 @@ ${config.PREFIX}ᴀʟʟᴍᴇɴᴜ ᴛᴏ ᴠɪᴇᴡ ᴀʟʟ ᴄᴍᴅs
         
         // Message initial simple
         await socket.sendMessage(sender, { 
-            text: 'AVISHKA🌹 ping...'
+            text: 'AMON-MD ping...'
         }, { quoted: msg });
 
         const endTime = new Date().getTime();
@@ -1075,7 +1075,7 @@ ${config.PREFIX}ᴀʟʟᴍᴇɴᴜ ᴛᴏ ᴠɪᴇᴡ ᴀʟʟ ᴄᴍᴅs
         console.error('Ping command error:', error);
         const startTime = new Date().getTime();
         await socket.sendMessage(sender, { 
-            text: 'AVISHKA🌹 ping...'
+            text: 'AMON-MD ping...'
         }, { quoted: msg });
         const endTime = new Date().getTime();
         await socket.sendMessage(sender, { 
@@ -3398,7 +3398,7 @@ case 'apk': {
       text: `✅ *sʜᴏʀᴛ ᴜʀʟ ᴄʀᴇᴀᴛᴇᴅ!* 😘\n\n` +
             `🌐 *ᴏʀɪɢɪɴᴀʟ:* ${url}\n` +
             `🔍 *sʜᴏʀᴛᴇɴᴇᴅ:* ${shortUrl}\n\n` +
-            `> © powered by AVISHKA🌹tech`
+            `> © powered by AmonTech`
     }, { 
       quoted: msg,
       forwardingScore: 1,
